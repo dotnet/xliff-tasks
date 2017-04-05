@@ -1,44 +1,52 @@
+#!/usr/bin/env bash
+# Copyright (c) .NET Foundation and contributors. All rights reserved.
+# Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+# Exit if any subcommand or pipeline returns non-zero status
 set -e
 
-SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-done
+# Change directories to this script's home
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
-DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-REPOROOT="$DIR"
+# Determine canonical directory name of current directory/repository root
+REPO_ROOT="$(pwd -P)"
 
-# Some things depend on HOME and it may not be set. We should fix those things, but until then, we just patch a value in
+# Some things depend on HOME and it may not be set
 if [ -z "$HOME" ]; then
-    export HOME="$DIR/.home"
-
-    [ ! -d "$HOME" ] || rm -Rf $HOME
+    export HOME="$REPO_ROOT/.home"
     mkdir -p $HOME
 fi
 
-# $args array may have empty elements in it.
-# The easiest way to remove them is to cast to string and back to array.
-# This will actually break quoted arguments, arguments like 
-# -test "hello world" will be broken into three arguments instead of two, as it should.
-args=( "$@" )
-temp="${args[@]}"
-args=($temp)
+CONFIGURATION=Debug
 
-export XDG_DATA_HOME="$REPOROOT/.nuget/packages"
-export NUGET_PACKAGES="$REPOROOT/.nuget/packages"
-export NUGET_HTTP_CACHE_PATH="$REPOROOT/.nuget/packages"
-export DOTNET_INSTALL_DIR="$REPOROOT/.dotnet"
+while true; do
+    arg="$(echo $1 | tr '[:upper:]' '[:lower:]')"
+    case $arg in
+        -release)
+            CONFIGURATION=Release
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+LOG_DIR=$REPO_ROOT/bin/$CONFIGURATION/Logs
+COMMIT_COUNT=$(git rev-list --count HEAD)
+
+export XDG_DATA_HOME="$REPO_ROOT/.nuget/packages"
+export NUGET_PACKAGES="$REPO_ROOT/.nuget/packages"
+export NUGET_HTTP_CACHE_PATH="$REPO_ROOT/.nuget/packages"
+export DOTNET_INSTALL_DIR="$REPO_ROOT/.dotnet"
 export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
 
-if [ ! -d "$DOTNET_INSTALL_DIR" ]; then
-  mkdir $DOTNET_INSTALL_DIR
-fi
+mkdir -p $DOTNET_INSTALL_DIR
+mkdir -p $LOG_DIR
 
 curl -sSL https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --install-dir $DOTNET_INSTALL_DIR --version 1.0.1
 
 PATH="$DOTNET_INSTALL_DIR:$PATH"
 
-dotnet msbuild build.proj /t:MakeVersionProps
-dotnet msbuild build.proj /v:diag /fl /flp:v=diag "${args[@]}"
+dotnet msbuild build/build.proj /v:normal /flp:Verbosity=Detailed\;LogFile=$LOG_DIR/msbuild.log\;Append /p:CommitCount=$COMMIT_COUNT /p:Configuration=$CONFIGURATION "$@"
+

@@ -1,0 +1,27 @@
+<Project DefaultTargets="BuildAll">
+  <Import Project="build.props" />
+
+  <ItemGroup>
+    <SolutionFile Include="..\src\*.sln" />
+    <TestProject Include="..\src\**\*.Tests.csproj" />
+    <PackProject Include="..\src\**\*.csproj" Exclude="@(TestProject)" />
+  </ItemGroup>
+
+  <Target Name="BuildAll" DependsOnTargets="Restore;Build;Test;Pack" />
+
+  <Target Name="Restore">
+    <MSBuild Projects="@(SolutionFile)" Targets="Restore" Properties="_ForceSeparateEvaluationForRestore=true" />
+  </Target>
+  
+  <Target Name="Build">
+    <MSBuild Projects="@(SolutionFile)" Targets="Build" />
+  </Target>
+
+  <Target Name="Test">
+    <MSBuild Projects="@(TestProject)" Targets="Test" />
+  </Target>
+
+  <Target Name="Pack">
+    <MSBuild Projects="@(PackProject)" Targets="Pack" Properties="NoBuild=true" />
+  </Target>
+</Project>
