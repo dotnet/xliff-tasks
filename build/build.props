@@ -11,7 +11,7 @@
     <TestResultsOutputPath>$(ConfigurationRootOutputPath)TestResults\</TestResultsOutputPath>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)key.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
-    <PublicSign>true</PublicSign>
+    <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
     <CommitCount Condition="'$(CommitCount)' == ''">0</CommitCount>
     <Version>$([System.String]::Format('0.2.0-beta-{0:000000}', $([MSBuild]::Add(0, $(CommitCount)))))</Version>
   </PropertyGroup>
