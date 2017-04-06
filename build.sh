@@ -48,5 +48,5 @@ curl -sSL https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/
 
 PATH="$DOTNET_INSTALL_DIR:$PATH"
 
-dotnet msbuild build/build.proj /v:normal /flp:Verbosity=Detailed\;LogFile=$LOG_DIR/msbuild.log\;Append /p:CommitCount=$COMMIT_COUNT /p:Configuration=$CONFIGURATION "$@"
+dotnet msbuild build/build.proj /v:normal /flp:Verbosity=Detailed\;LogFile=$LOG_DIR/msbuild.log /p:CommitCount=$COMMIT_COUNT /p:Configuration=$CONFIGURATION "$@"
 

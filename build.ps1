@@ -35,4 +35,4 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/s
 
 $env:PATH="$DotnetInstallDir;$env:PATH"
 
-& dotnet msbuild build\build.proj /v:normal /flp:Verbosity=Diag`;LogFile=$LogDir\msbuild.log`;Append /p:CommitCount=$CommitCount /p:Configuration=$Configuration $ExtraParameters 
+& dotnet msbuild build\build.proj /v:normal /flp:Verbosity=Diag`;LogFile=$LogDir\msbuild.log /p:CommitCount=$CommitCount /p:Configuration=$Configuration $ExtraParameters 
