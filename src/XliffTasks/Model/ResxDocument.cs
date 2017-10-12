@@ -2,6 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace XliffTasks.Model
@@ -50,6 +52,24 @@ namespace XliffTasks.Model
                     source: value, 
                     note: comment, 
                     element: valueElement);
+            }
+        }
+
+        protected override void LoadCore(TextReader reader)
+        {
+            base.LoadCore(reader);
+
+            ExcludeNodesPointingExternalFiles();
+        }
+
+        private void ExcludeNodesPointingExternalFiles()
+        {
+            foreach (var node in Document.Descendants("data").ToList())
+            {
+                if (node.Attribute("type")?.Value == "System.Resources.ResXFileRef, System.Windows.Forms")
+                {
+                    node.Remove();
+                }
             }
         }
     }
