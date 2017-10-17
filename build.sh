@@ -44,7 +44,7 @@ export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
 mkdir -p $DOTNET_INSTALL_DIR
 mkdir -p $LOG_DIR
 
-curl -sSL https://raw.githubusercontent.com/dotnet/cli/release/2.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --install-dir $DOTNET_INSTALL_DIR --version 2.0.0
+curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --install-dir $DOTNET_INSTALL_DIR --version 2.0.0
 
 PATH="$DOTNET_INSTALL_DIR:$PATH"
 
