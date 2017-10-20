@@ -17,6 +17,7 @@ namespace XliffTasks.Model
         {
             foreach (var strings in Document.Descendants(Document.Root.Name.Namespace + "Strings"))
             {
+                string vsctGuid = strings.Parent.Attribute("guid")?.Value ?? string.Empty;
                 string id = strings.Parent.Attribute("id").Value;
 
                 foreach (var child in strings.Elements())
@@ -31,8 +32,10 @@ namespace XliffTasks.Model
                         continue;
                     }
 
+                    var uniqueId = $"{vsctGuid}{id}|{name.LocalName}";
+
                     yield return new TranslatableXmlElement(
-                        id: $"{id}|{name.LocalName}",
+                        id: uniqueId,
                         source: child.Value,
                         note: null,
                         element: child);

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Commands package="guidRoslynPkgId">
+    <Buttons>
+      <Button guid="guidCSharpInteractiveCommandSet" id="cmdidResetInteractiveFromProject" priority="0x0100" type="Button">
+        <Parent guid="guidCSharpInteractiveCommandSet" id="IDG_INTERACTIVE_PROJECT"/>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Initialize Interactive with Project</ButtonText>
+          <LocCanonicalName>ResetC#InteractiveFromProject</LocCanonicalName>
+        </Strings>
+      </Button>
+      <Button guid="guidVisualBasicInteractiveCommandSet" id="cmdidResetInteractiveFromProject" priority="0x0100" type="Button">
+        <Strings>
+          <ButtonText>Reset Visual Basic Interactive from Project</ButtonText>
+          <LocCanonicalName>ResetVisualBasicInteractiveFromProject</LocCanonicalName>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+</CommandTable>
