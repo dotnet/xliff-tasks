@@ -1,8 +1,0 @@
-<Project>
-
-  <Target Name="Test">
-    <Delete Files="$(TestResultsOutputPath)$(MSBuildProjectName).trx" />
-    <Exec Command='dotnet test $(MSBuildProjectFile) --logger "trx;LogFileName=$(MSBuildProjectName).trx" -- RunConfiguration.ResultsDirectory=$(TestResultsOutputPath.TrimEnd("/\"))' />
-  </Target>
-
-</Project>
