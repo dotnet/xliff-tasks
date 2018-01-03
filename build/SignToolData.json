@@ -2,7 +2,7 @@
     "sign": [
         {
             "certificate": "Microsoft402",
-            "strongName": "MsSharedLib72",
+            "strongName": null,
             "values": [
                 "bin\XliffTasks\*\XliffTasks.dll"
             ]
