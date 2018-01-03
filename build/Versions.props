@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the MIT license. See License.txt in the project root for full license information. -->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <!-- Repo Version Information -->
+  <PropertyGroup>
+    <VersionBase>0.2.0</VersionBase>
+    <PreReleaseVersionLabel>beta</PreReleaseVersionLabel>
+  </PropertyGroup>
+
+  <!-- Repo Toolset Features -->
+  <PropertyGroup>
+    <UsingToolMicrosoftNetCompilers>false</UsingToolMicrosoftNetCompilers>
+    <UsingToolXliff>false</UsingToolXliff>
+  </PropertyGroup>
+
+  <!-- Toolset Dependencies -->
+  <PropertyGroup>
+    <DotNetCliVersion>2.0.2-vspre-006963</DotNetCliVersion>
+    <RoslynToolsRepoToolsetVersion>1.0.0-beta-62503-02</RoslynToolsRepoToolsetVersion>
+    <VSWhereVersion>2.2.7</VSWhereVersion>
+  </PropertyGroup>
+
+  <!-- Production Dependencies -->
+  <PropertyGroup>
+    <MicrosoftCodeAnalysisCSharpVersion>2.1.0</MicrosoftCodeAnalysisCSharpVersion>
+    <MicrosoftDotNetCliUtilsVersion>1.0.1</MicrosoftDotNetCliUtilsVersion>
+    <NuGetPackagingCoreVersion>4.3.0-rtm-4324</NuGetPackagingCoreVersion>
+    <NuGetProjectModelVersion>4.3.0-rtm-4324</NuGetProjectModelVersion>
+    <SystemCollectionsSpecializedVersion>4.3.0</SystemCollectionsSpecializedVersion>
+  </PropertyGroup>
+
+  <!-- Test Dependencies -->
+  <PropertyGroup>
+    <FluentAssertionsVersion>4.19.2</FluentAssertionsVersion>
+    <MicrosoftDotNetCliCommandLineVersion>0.1.0-alpha-142</MicrosoftDotNetCliCommandLineVersion>
+    <MicrosoftDotNetInternalAbstractionsVersion>1.0.500-preview2-1-003177</MicrosoftDotNetInternalAbstractionsVersion>
+    <MicrosoftDotNetPlatformAbstractionsVersion>1.0.3</MicrosoftDotNetPlatformAbstractionsVersion>
+    <MoqNetCoreVersion>4.4.0-beta8</MoqNetCoreVersion>
+    <SystemDiagnosticsProcessVersion>4.3.0</SystemDiagnosticsProcessVersion>
+    <SystemReflectionTypeExtensionsVersion>4.3.0</SystemReflectionTypeExtensionsVersion>
+  </PropertyGroup>
+
+</Project>
