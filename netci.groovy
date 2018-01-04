@@ -14,7 +14,7 @@ def static getBuildJobName(def configuration, def os) {
 }
 
 ['Windows_NT', 'Ubuntu14.04', 'OSX10.12'].each { os ->
-    ['Debug', 'Release'].each { architecture ->
+    ['Debug', 'Release'].each { config ->
         [true, false].each { isPR ->
             // Calculate job name
             def jobName = getBuildJobName(config, os)
@@ -50,7 +50,7 @@ def static getBuildJobName(def configuration, def os) {
             Utilities.standardJobSetup(newJob, project, isPR, "*/${branch}")
 
             if (isPR) {
-                Utilities.addGithubPRTriggerForBranch(newJob, branch, "$os $architecture $config")
+                Utilities.addGithubPRTriggerForBranch(newJob, branch, "$os $config")
             }
 
             def archiveSettings = new ArchivalSettings()
