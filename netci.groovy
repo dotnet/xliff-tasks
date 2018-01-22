@@ -29,7 +29,7 @@ def static getBuildJobName(def configuration, def os) {
                 machineAffinity = 'latest-dev15-3'
             }
             else {
-                buildCommand = "./build.sh --configuration $config"
+                buildCommand = "./build/cibuild.sh --configuration $config"
             }
 
             def newJob = job(Utilities.getFullJobName(project, jobName, isPR)) {
