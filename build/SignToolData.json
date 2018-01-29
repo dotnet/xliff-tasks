@@ -6,6 +6,13 @@
             "values": [
                 "bin/XliffTasks/*/XliffTasks.dll"
             ]
+        },
+        {
+            "certificate": null,
+            "strongName": null,
+            "values": [
+                "packages/*.nupkg"
+            ]
         }
     ]
 }
