@@ -18,7 +18,7 @@ Otherwise, you'll need to add the dotnet-core feed on MyGet (`https://dotnet.myg
 <PackageReference Include="XliffTasks" Version="0.2.0-beta-000081" PrivateAssets="all" />
 ```
 
-The `PrivateAssets` metdata is needed to prevent `dotnet pack` or `msbuild /t:pack` from listing `XliffTasks` as one of your package's dependencies.
+The `PrivateAssets` metadata is needed to prevent `dotnet pack` or `msbuild /t:pack` from listing `XliffTasks` as one of your package's dependencies.
 
 ## Using XliffTasks
 
