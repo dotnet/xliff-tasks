@@ -1,6 +1,6 @@
 # xliff-tasks
 
-A set of MSBuild tasks and targets to automatically generate xliff (.xlf) files for localizable resources, and to build satellite assemblies from those xliff files.
+A set of MSBuild tasks and targets to automatically update xliff (.xlf) files for localizable resources, and to build satellite assemblies from those xliff files.
 
 ## Build Status
 
@@ -15,12 +15,20 @@ If you're using the [Roslyn Repo Toolset][roslyn-repo-toolset] then the `XliffTa
 Otherwise, you'll need to add the dotnet-core feed on MyGet (`https://dotnet.myget.org/F/dotnet-core/api/v3/index.json`) to your nuget.config file, and then add a `PackageReference` for the XliffTasks package, like so:
 
 ```
-<PackageReference Include="XliffTasks" Version="0.2.0-beta-000081" />
+<PackageReference Include="XliffTasks" Version="0.2.0-beta-000081" PrivateAssets="all" />
 ```
+
+The `PrivateAssets` metdata is needed to prevent `dotnet pack` or `msbuild /t:pack` from listing `XliffTasks` as one of your package's dependencies.
 
 ## Using XliffTasks
 
-Once `XliffTasks` is installed building a project will automatically build satellite assemblies from .xlf files. To _update_ .xlf files to bring them in line with the source .resx/.vsct/.xaml files you need to set the `UpdateXlfOnBuild` property to true when building, like so:
+Once `XliffTasks` is installed building a project will automatically build satellite assemblies from .xlf files. To _update_ .xlf files to bring them in line with the source .resx/.vsct/.xaml files you need to run the `UpdateXlf` target, like so: 
+
+```
+msbuild /t:UpdateXlf
+```
+
+This will only update the .xlf files. Alternatively, run a normal build with the `UpdateXlfOnBuild` property set:
 
 ```
 msbuild /p:UpdateXlfOnBuild=true
