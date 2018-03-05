@@ -12,7 +12,7 @@ A set of MSBuild tasks and targets to automatically update xliff (.xlf) files fo
 
 If you're using the [Roslyn Repo Toolset][roslyn-repo-toolset] then the `XliffTasks` package is already pulled in, and enabled by default.
 
-Otherwise, you'll need to add the dotnet-core feed on MyGet (`https://dotnet.myget.org/F/dotnet-core/api/v3/index.json`) to your nuget.config file, and then add a `PackageReference` for the XliffTasks package, like so:
+Otherwise, you'll need to add the [dotnet-core](https://dotnet.myget.org/feed/dotnet-core/package/nuget/XliffTasks) feed on MyGet (`https://dotnet.myget.org/F/dotnet-core/api/v3/index.json`) to your nuget.config file, and then add a `PackageReference` for the XliffTasks package, like so:
 
 ```
 <PackageReference Include="XliffTasks" Version="0.2.0-beta-000081" PrivateAssets="all" />
