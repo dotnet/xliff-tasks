@@ -56,18 +56,23 @@
   </Target>
 
   <Target Name="UpdateXlfOnBuild"
-          Condition="'$(EnableXlfLocalization)' == 'true' and '$(UpdateXlfOnBuild)' == 'true' and '$(_IsInnerXlfBuild)' != 'true'"
+          Condition="'$(EnableXlfLocalization)' == 'true'
+                     and '$(UpdateXlfOnBuild)' == 'true'
+                     and '$(_IsInnerXlfBuild)' != 'true'
+                     and '$(BuildingForLiveUnitTesting)' != 'true'
+                     and '$(DesignTimeBuild)' != 'true'
+                     and '$(BuildingProject)' != 'false'"
           BeforeTargets="BeforeBuild"
           DependsOnTargets="UpdateXlf"
           />
-  
+
   <Target Name="EnsureXlfIsUpToDate"
           Condition="'$(ErrorOnOutOfDateXlf)' == 'true'"
           DependsOnTargets="_DisallowXlfModification;_UpdateXlf"
           />
-  
+
   <Target Name="UpdateXlf"
-          DependsOnTargets="_AllowXlfModification;_UpdateXlf" 
+          DependsOnTargets="_AllowXlfModification;_UpdateXlf"
           />
 
   <Target Name="_AllowXlfModification">
@@ -116,7 +121,7 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="GatherXlf" 
+  <Target Name="GatherXlf"
           DependsOnTargets="GetXlfSources;EnsureXlfIsUpToDate"
           >
     <GatherXlf Sources="@(XlfSource)"
