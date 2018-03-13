@@ -37,6 +37,13 @@
       there is an outer build trigger that calls inner UpdateXlf serially.
     -->
     <_IsInnerXlfBuild Condition="'$(TargetFrameworks)' != '' and '$(TargetFramework)' != ''">true</_IsInnerXlfBuild>
+  
+    <!--
+      Don't run the targets during builds for Live Unit Testing, or during design-time builds.
+      -->
+    <_IsExcludedBuild Condition="'$(BuildingForLiveUnitTesting)' == 'true'
+                                or '$(DesignTimeBuild)' == 'true'
+                                or '$(BuildingProject)' == 'false'">true</_IsExcludedBuild>
   </PropertyGroup>
 
   <!-- Updates the list of XlfSource items that drives incremental update (see above) -->
@@ -59,9 +66,7 @@
           Condition="'$(EnableXlfLocalization)' == 'true'
                      and '$(UpdateXlfOnBuild)' == 'true'
                      and '$(_IsInnerXlfBuild)' != 'true'
-                     and '$(BuildingForLiveUnitTesting)' != 'true'
-                     and '$(DesignTimeBuild)' != 'true'
-                     and '$(BuildingProject)' != 'false'"
+                     and '$(_IsExcludedBuild)' != 'true'"
           BeforeTargets="BeforeBuild"
           DependsOnTargets="UpdateXlf"
           />
@@ -133,7 +138,7 @@
   </Target>
 
   <Target Name="TranslateSourceFromXlf"
-          Condition="'$(EnableXlfLocalization)' == 'true'"
+          Condition="'$(EnableXlfLocalization)' == 'true' and '$(_IsExcludedBuild) != 'true'"
           DependsOnTargets="GatherXlf;BatchTranslateSourceFromXlf"
           BeforeTargets="VSCTCompile;PrepareResourceNames;$(PrepareResourceNamesDependsOn)"
           >
