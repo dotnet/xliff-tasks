@@ -22,6 +22,8 @@ The `PrivateAssets` metadata is needed to prevent `dotnet pack` or `msbuild /t:p
 
 ## Using XliffTasks
 
+### Updating .xlf files
+
 Once `XliffTasks` is installed building a project will automatically build satellite assemblies from .xlf files. To _update_ .xlf files to bring them in line with the source .resx/.vsct/.xaml files you need to run the `UpdateXlf` target, like so: 
 
 ```
@@ -38,7 +40,13 @@ By default, `XliffTasks` will produce an error during build if it detects that t
 
 Many teams using `XliffTasks` default `UpdateXlfOnBuild` to true for local developer builds, but leave it off for CI builds. This way the .xlf files are automatically updated as the developer works, and the CI build will fail if the developer forgets to include the changes to the .xlf files as part of their PR. This way the .xlf files are always in sync with the source files, and can be handed off to a localization team at any time.
 
-Other workflows are possible by changing the `XliffTasks` properties.
+Other workflows are possible by changing the `XliffTasks` properties (see below)
+
+### Sorting .xlf files
+
+`XliffTasks` attempts to keep .xlf files sorted when inserting new items. This doesn't matter for the generation of satellite assemblies, but can reduce merge conflicts when localizable resources are being added in multiple branches (as opposed to always adding new items at the end, which more or less guarantees merge conflicts).
+
+Note `XliffTasks` does not force the items into a sorted order if they are not already sorted. You can do that manually by running `msbuild /t:SortXlf`.
 
 ## Properties
 
