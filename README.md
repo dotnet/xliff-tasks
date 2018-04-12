@@ -1,6 +1,6 @@
 # xliff-tasks
 
-A set of MSBuild tasks and targets to automatically update xliff (.xlf) files for localizable resources, and to build satellite assemblies from those xliff files.
+A set of MSBuild tasks and targets to automatically update xliff (.xlf) files for localizable resources in managed projects, and to build satellite assemblies from those xliff files.
 
 ## Build Status
 
@@ -21,6 +21,15 @@ Otherwise, you'll need to add the dotnet-core feed on MyGet (`https://dotnet.myg
 The `PrivateAssets` metadata is needed to prevent `dotnet pack` or `msbuild /t:pack` from listing `XliffTasks` as one of your package's dependencies.
 
 ## Using XliffTasks
+
+### Supported file types
+
+`XliffTasks` currently supports the following source file types:
+
+- .resx
+- .vsct
+- .xaml
+- Unstructured text files
 
 ### Updating .xlf files
 
