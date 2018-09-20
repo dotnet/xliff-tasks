@@ -78,6 +78,8 @@ function InstallDotNetCli {
 
   if (!(Test-Path $DotNetInstallScript)) {
     Create-Directory $DotNetRoot
+    # Force TLS 1.2 to ensure this download works
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -UseBasicParsing -OutFile $DotNetInstallScript
   }
 

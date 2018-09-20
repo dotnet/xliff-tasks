@@ -31,46 +31,62 @@ namespace XliffTasks.Tasks
                 string sourcePath = item.ItemSpec;
                 string sourceDocumentPath = item.GetMetadataOrDefault(MetadataKey.SourceDocumentPath, item.ItemSpec);
                 string sourceFormat = item.GetMetadataOrThrow(MetadataKey.XlfSourceFormat);
-                TranslatableDocument sourceDocument = LoadSourceDocument(sourcePath, sourceFormat);
-                string sourceDocumentId = GetSourceDocumentId(sourcePath);
 
-                foreach (var language in Languages)
+                TranslateDocument(sourcePath, sourceFormat, sourceDocumentPath);
+            }
+        }
+
+        internal void TranslateDocument(string sourcePath, string sourceFormat, string sourceDocumentPath)
+        {
+            TranslatableDocument sourceDocument = LoadSourceDocument(sourcePath, sourceFormat);
+            string sourceDocumentId = GetSourceDocumentId(sourcePath);
+
+            foreach (var language in Languages)
+            {
+                string xlfPath = GetXlfPath(sourceDocumentPath, language);
+
+                // if there is nothing to translate then we should clean up the XLF files, or just skip as we don't want to generate them
+                if (sourceDocument.Nodes.Count == 0)
                 {
-                    string xlfPath = GetXlfPath(sourceDocumentPath, language);
-                    XlfDocument xlfDocument;
-
-                    try
+                    if (File.Exists(xlfPath))
                     {
-                        xlfDocument = LoadXlfDocument(xlfPath, language, createIfNonExistent: AllowModification);
+                        File.Delete(xlfPath);
                     }
-                    catch (FileNotFoundException fileNotFoundEx) when (fileNotFoundEx.FileName == xlfPath)
-                    {
-                        Release.Assert(!AllowModification);
-                        throw new BuildErrorException($"'{xlfPath}' for '{sourcePath}' does not exist. {HowToUpdate}");
-                    }
-                    catch (System.Xml.XmlException xmlEx)
-                    {
-                        throw new BuildErrorException($"Unable to load file: {xmlEx.Message}")
-                        {
-                            RelatedFile = xlfPath
-                        };
-                    }
-
-                    bool updated = xlfDocument.Update(sourceDocument, sourceDocumentId);
-
-                    if (!updated)
-                    {
-                        continue; // no changes
-                    }
-
-                    if (!AllowModification)
-                    {
-                        throw new BuildErrorException($"'{xlfPath}' is out-of-date with '{sourcePath}'. {HowToUpdate}");
-                    }
-
-                    Directory.CreateDirectory(Path.GetDirectoryName(xlfPath));
-                    xlfDocument.Save(xlfPath);
+                    continue;
                 }
+
+                XlfDocument xlfDocument;
+                try
+                {
+                    xlfDocument = LoadXlfDocument(xlfPath, language, createIfNonExistent: AllowModification);
+                }
+                catch (FileNotFoundException fileNotFoundEx) when (fileNotFoundEx.FileName == xlfPath)
+                {
+                    Release.Assert(!AllowModification);
+                    throw new BuildErrorException($"'{xlfPath}' for '{sourcePath}' does not exist. {HowToUpdate}");
+                }
+                catch (System.Xml.XmlException xmlEx)
+                {
+                    throw new BuildErrorException($"Unable to load file: {xmlEx.Message}")
+                    {
+                        RelatedFile = xlfPath
+                    };
+                }
+
+                bool updated = xlfDocument.Update(sourceDocument, sourceDocumentId);
+
+                if (!updated)
+                {
+                    continue; // no changes
+                }
+
+                if (!AllowModification)
+                {
+                    throw new BuildErrorException($"'{xlfPath}' is out-of-date with '{sourcePath}'. {HowToUpdate}");
+                }
+
+                Directory.CreateDirectory(Path.GetDirectoryName(xlfPath));
+                xlfDocument.Save(xlfPath);
             }
         }
     }

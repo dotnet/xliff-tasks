@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <InternalsVisibleTo Include="XliffTasks.Tests" />
   </ItemGroup>
 
