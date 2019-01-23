@@ -78,6 +78,7 @@ function InstallDotNetCli {
 
   if (!(Test-Path $DotNetInstallScript)) {
     Create-Directory $DotNetRoot
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -UseBasicParsing -OutFile $DotNetInstallScript
   }
 
@@ -139,6 +140,7 @@ function InstallNuGet {
 
   if (!(Test-Path -Path $NugetExe)) {
     Create-Directory $NugetInstallDir
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Invoke-WebRequest "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" -UseBasicParsing -OutFile $NugetExe
   }
 }
@@ -174,6 +176,7 @@ function LocateVisualStudio {
 
   if (!(Test-Path $VSWhereExe)) {
     Create-Directory $VSWhereDir
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Invoke-WebRequest "http://github.com/Microsoft/vswhere/releases/download/$VSWhereVersion/vswhere.exe" -UseBasicParsing -OutFile $VSWhereExe
   }
 
