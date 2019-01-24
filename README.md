@@ -48,7 +48,7 @@ Other workflows are possible by changing the `XliffTasks` properties (see below)
 
 Note `XliffTasks` does not force the items into a sorted order if they are not already sorted. You can do that manually by running `msbuild /t:SortXlf`.
 
-## Properties
+## Project Properties
 
 `EnableXlfLocalization` - The "master switch" for turning locallization with `XliffTasks` on or off completely. When set to false, .xlf files will not be updated and satellite assemblies will not be generated from the .xlf files, regardless of the other properties. Defaults to true, but it is useful to set it to false for any project that does not need to produce localized resources (unit test projects, packaging projects, etc.).
 
@@ -57,6 +57,10 @@ Note `XliffTasks` does not force the items into a sorted order if they are not a
 `ErrorOnOutOfDateXlf` - When set to true the build will produce an error if the .xlf files are out-of-date with respect to the source files. Defaults to true.
 
 `XlfLanguages` - The set of locales to which the project is localized. Defaults to the thirteen locales supported by Visual Studio: `cs;de;es;fr;it;ja;ko;pl;pt-BR;ru;tr;zh-Hans;zh-Hant`.
+
+## Source File Properties
+
+`XlfInput` - Set this to false to opt out of .xlf file generation for a specific source file that would otherwise be included by default.
 
 ## Contact
 
