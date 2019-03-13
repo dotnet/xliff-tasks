@@ -85,7 +85,7 @@
   </Target>
 
   <Target Name="_UpdateXlf"
-          DependsOnTargets="GetXlfSources;GatherXlf;UpdateXlfSourceList"
+          DependsOnTargets="GatherXlf;UpdateXlfSourceList"
           Inputs="@(XlfSource);@(Xlf);$(_XlfSourceList)"
           Outputs="$(_UpdateXlfLastRun)"
           >
@@ -119,7 +119,7 @@
   </Target>
 
   <Target Name="GatherXlf"
-          DependsOnTargets="GetXlfSources;EnsureXlfIsUpToDate"
+          DependsOnTargets="GetXlfSources"
           >
     <GatherXlf Sources="@(XlfSource)"
                Languages="$(XlfLanguages)"
@@ -131,7 +131,7 @@
 
   <Target Name="TranslateSourceFromXlf"
           Condition="'$(EnableXlfLocalization)' == 'true'"
-          DependsOnTargets="GatherXlf;BatchTranslateSourceFromXlf"
+          DependsOnTargets="GatherXlf;EnsureXlfIsUpToDate;BatchTranslateSourceFromXlf"
           BeforeTargets="VSCTCompile;PrepareResourceNames;$(PrepareResourceNamesDependsOn)"
           >
     <GatherTranslatedSource XlfFiles="@(Xlf)" Condition="'@(Xlf)' != ''">
