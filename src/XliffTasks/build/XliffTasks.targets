@@ -85,8 +85,8 @@
   </Target>
 
   <Target Name="_UpdateXlf"
-          DependsOnTargets="GetXlfSources;UpdateXlfSourceList"
-          Inputs="@(XlfSource);$(_XlfSourceList)"
+          DependsOnTargets="GetXlfSources;GatherXlf;UpdateXlfSourceList"
+          Inputs="@(XlfSource);@(Xlf);$(_XlfSourceList)"
           Outputs="$(_UpdateXlfLastRun)"
           >
     <UpdateXlf Sources="@(XlfSource)"
