@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Repo Version Information -->
+    <VersionBase>0.2.0</VersionBase>
+    <PreReleaseVersionLabel>beta</PreReleaseVersionLabel>
+
+    <!-- Repo Toolset Features -->
+    <UsingToolMicrosoftNetCompilers>false</UsingToolMicrosoftNetCompilers>
+    <UsingToolXliff>false</UsingToolXliff>
+
+    <!-- Production Dependencies -->
+    <MicrosoftCodeAnalysisCSharpVersion>2.1.0</MicrosoftCodeAnalysisCSharpVersion>
+    <MicrosoftDotNetCliUtilsVersion>1.0.1</MicrosoftDotNetCliUtilsVersion>
+    <NuGetPackagingCoreVersion>4.3.0-rtm-4324</NuGetPackagingCoreVersion>
+    <NuGetProjectModelVersion>4.3.0-rtm-4324</NuGetProjectModelVersion>
+    <SystemCollectionsSpecializedVersion>4.3.0</SystemCollectionsSpecializedVersion>
+
+    <!-- Test Dependencies -->
+    <FluentAssertionsVersion>4.19.2</FluentAssertionsVersion>
+    <MicrosoftDotNetCliCommandLineVersion>0.1.0-alpha-142</MicrosoftDotNetCliCommandLineVersion>
+    <MicrosoftDotNetInternalAbstractionsVersion>1.0.500-preview2-1-003177</MicrosoftDotNetInternalAbstractionsVersion>
+    <MicrosoftDotNetPlatformAbstractionsVersion>1.0.3</MicrosoftDotNetPlatformAbstractionsVersion>
+    <MoqNetCoreVersion>4.4.0-beta8</MoqNetCoreVersion>
+    <SystemDiagnosticsProcessVersion>4.3.0</SystemDiagnosticsProcessVersion>
+    <SystemReflectionTypeExtensionsVersion>4.3.0</SystemReflectionTypeExtensionsVersion>
+    
+    <StrongNameKeyId>MicrosoftAspNet</StrongNameKeyId>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreSources>
+      $(RestoreSources);
+      https://dotnet.myget.org/F/msbuild/api/v3/index.json;
+      https://dotnet.myget.org/F/roslyn-tools/api/v3/index.json;
+      https://dotnet.myget.org/F/system-commandline/api/v3/index.json;
+      https://dotnet.myget.org/F/roslyn/api/v3/index.json;
+      https://dotnet.myget.org/F/roslyn-analyzers/api/v3/index.json;
+      https://myget.org/F/vs-devcore/api/v3/index.json;
+      https://myget.org/F/vs-editor/api/v3/index.json;
+      https://vside.myget.org/F/vssdk/api/v3/index.json;
+      https://vside.myget.org/F/vs-impl/api/v3/index.json;
+    </RestoreSources>
+  </PropertyGroup>
+</Project>
