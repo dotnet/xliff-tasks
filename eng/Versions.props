@@ -4,18 +4,15 @@
     <!-- Repo Version Information -->
     <VersionBase>0.2.0</VersionBase>
     <PreReleaseVersionLabel>beta</PreReleaseVersionLabel>
-
     <!-- Repo Toolset Features -->
     <UsingToolMicrosoftNetCompilers>false</UsingToolMicrosoftNetCompilers>
     <UsingToolXliff>false</UsingToolXliff>
-
     <!-- Production Dependencies -->
     <MicrosoftCodeAnalysisCSharpVersion>2.1.0</MicrosoftCodeAnalysisCSharpVersion>
     <MicrosoftDotNetCliUtilsVersion>1.0.1</MicrosoftDotNetCliUtilsVersion>
     <NuGetPackagingCoreVersion>4.3.0-rtm-4324</NuGetPackagingCoreVersion>
     <NuGetProjectModelVersion>4.3.0-rtm-4324</NuGetProjectModelVersion>
     <SystemCollectionsSpecializedVersion>4.3.0</SystemCollectionsSpecializedVersion>
-
     <!-- Test Dependencies -->
     <FluentAssertionsVersion>4.19.2</FluentAssertionsVersion>
     <MicrosoftDotNetCliCommandLineVersion>0.1.0-alpha-142</MicrosoftDotNetCliCommandLineVersion>
@@ -24,7 +21,6 @@
     <MoqNetCoreVersion>4.4.0-beta8</MoqNetCoreVersion>
     <SystemDiagnosticsProcessVersion>4.3.0</SystemDiagnosticsProcessVersion>
     <SystemReflectionTypeExtensionsVersion>4.3.0</SystemReflectionTypeExtensionsVersion>
-    
     <StrongNameKeyId>MicrosoftAspNet</StrongNameKeyId>
   </PropertyGroup>
   <PropertyGroup>
