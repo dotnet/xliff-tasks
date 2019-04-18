@@ -55,7 +55,7 @@ jobs:
         _configuration: Release
   timeoutInMinutes: 90
   steps:
-    - script: $(Build.SourcesDirectory)/eng/common/cibuild.sh --configuration $(_configuration) --prepareMachine
+    - script: .$(Build.SourcesDirectory)/eng/common/cibuild.sh --configuration $(_configuration) --prepareMachine
       displayName: Build and Test
     - task: PublishTestResults@2
       displayName: Publish xUnit Test Results
