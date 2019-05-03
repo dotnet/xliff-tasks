@@ -63,6 +63,12 @@ jobs:
           value: Test
         - name: _BuildArgs
           value: /p:SignType=$(_SignType)
+      strategy:
+        matrix:
+          Debug:
+            _BuildConfig: Debug
+          Release:
+            _BuildConfig: Release
       steps:
       - checkout: self
         clean: true
@@ -78,6 +84,12 @@ jobs:
       - job: Linux
         pool: 
           name: Hosted Ubuntu 1604
+        strategy:
+          matrix:
+            Debug:
+              _BuildConfig: Debug
+            Release:
+              _BuildConfig: Release
         variables:
         - name: _SignType
           value: Test
