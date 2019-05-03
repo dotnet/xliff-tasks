@@ -1,10 +1,8 @@
 # CI and PR triggers
 trigger:
 - master
-- release/3.0
 pr:
 - master
-- release/3.0
 
 variables:
   - name: _TeamName
@@ -30,10 +28,10 @@ jobs:
     - job: Windows_NT
       pool: 
         ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
-          name: NetCorePublic-Int-Pool
+          name: NetCorePublic-Pool
           queue: buildpool.windows.10.amd64.vs2017.open
         ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-          name: NetCoreInternal-Int-Pool
+          name: NetCoreInternal-Pool
           queue: buildpool.windows.10.amd64.vs2017
       variables:
       # Enable signing for internal, non-PR builds
