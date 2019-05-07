@@ -6,16 +6,16 @@ A set of MSBuild tasks and targets to automatically update xliff (.xlf) files fo
 
 |Windows x64 |
 |:------:|
-|[![][win-x64-build-badge]][win-x64-build]|
+|[![Build Status][win-x64-build-badge]][win-x64-build]|
 
 ## Installing
 
-If you're using the [Roslyn Repo Toolset][roslyn-repo-toolset] then the `XliffTasks` package is already pulled in, and enabled by default.
+If you're using the [Arcade Toolset][arcade-toolset] then the `XliffTasks` package is already pulled in, and enabled by default.
 
 Otherwise, you'll need to add the dotnet-core feed on MyGet (`https://dotnet.myget.org/F/dotnet-core/api/v3/index.json`) to your nuget.config file, and then add a `PackageReference` for the XliffTasks package, like so:
 
 ```
-<PackageReference Include="XliffTasks" Version="0.2.0-beta-000081" PrivateAssets="all" />
+<PackageReference Include="XliffTasks" Version="1.0.0-beta.19253.1" PrivateAssets="all" />
 ```
 
 The `PrivateAssets` metadata is needed to prevent `dotnet pack` or `msbuild /t:pack` from listing `XliffTasks` as one of your package's dependencies.
@@ -66,6 +66,6 @@ Note `XliffTasks` does not force the items into a sorted order if they are not a
 
 For more information, contact @tmeschter or @nguerrera on GitHub, or file an issue.
  
-[win-x64-build-badge]: https://devdiv.visualstudio.com/_apis/public/build/definitions/0bdbc590-a062-4c3f-b0f6-9383f67865ee/5803/badge
-[win-x64-build]: https://devdiv.visualstudio.com/DevDiv/_build/index?definitionId=5803&_a=completed
-[roslyn-repo-toolset]: https://github.com/dotnet/roslyn-tools/blob/master/docs/RepoToolset.md
+[win-x64-build-badge]: https://devdiv.visualstudio.com/DevDiv/_apis/build/status/DotNet/xliff-tasks/master/dotnet.xliff-tasks?branchName=master
+[win-x64-build]: https://devdiv.visualstudio.com/DevDiv/_build/latest?definitionId=11329&branchName=master
+[arcade-toolset]: https://github.com/dotnet/arcade
