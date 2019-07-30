@@ -10,7 +10,7 @@ variables:
   - name: _BuildConfig 
     value: Release
   - name: _PublishUsingPipelines
-    value: true
+    value: false
   - name: _DotNetArtifactsCategory
     value: .NETCore
 
@@ -65,8 +65,9 @@ jobs:
           value: /p:SignType=$(_SignType)
       strategy:
         matrix:
-          Debug:
-            _BuildConfig: Debug
+          ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
+            Debug:
+              _BuildConfig: Debug
           Release:
             _BuildConfig: Release
       steps:
