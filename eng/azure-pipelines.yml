@@ -104,9 +104,9 @@ stages:
               --prepareMachine
             displayName: Linux Build
 
-  - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-    - template: /eng/common/templates/post-build/post-build.yml
-      parameters:
-        # Symbol validation isn't being very reliable lately. This should be enabled back
-        # once this issue is resolved: https://github.com/dotnet/arcade/issues/2871
-        enableSymbolValidation: false
+- ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+  - template: /eng/common/templates/post-build/post-build.yml
+    parameters:
+      # Symbol validation isn't being very reliable lately. This should be enabled back
+      # once this issue is resolved: https://github.com/dotnet/arcade/issues/2871
+      enableSymbolValidation: false
