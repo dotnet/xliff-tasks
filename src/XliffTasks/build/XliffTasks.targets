@@ -40,6 +40,18 @@
     <_IsInnerXlfBuild Condition="'$(TargetFrameworks)' != '' and '$(TargetFramework)' != ''">true</_IsInnerXlfBuild>
   </PropertyGroup>
 
+  <!-- Suppress execution in certain contexts -->
+  <PropertyGroup>
+    <!-- In the normal case, run before the 'BeforeBuild' target -->
+    <_UpdateXlfOnBuildBeforeTargets Condition="'$(_UpdateXlfOnBuildBeforeTargets)' == ''">BeforeBuild</_UpdateXlfOnBuildBeforeTargets>
+    <!-- Do not run as part of live unit testing -->
+    <_UpdateXlfOnBuildBeforeTargets Condition="'$(BuildingForLiveUnitTesting)' == 'true'"></_UpdateXlfOnBuildBeforeTargets>
+    <!-- Do not run during CPS/MLPS design-time builds -->
+    <_UpdateXlfOnBuildBeforeTargets Condition="'$(DesignTimeBuild)' == 'true'"></_UpdateXlfOnBuildBeforeTargets>
+    <!-- Do not run during legacy design-time builds -->
+    <_UpdateXlfOnBuildBeforeTargets Condition="'$(BuildingProject)' == 'false'"></_UpdateXlfOnBuildBeforeTargets>
+  </PropertyGroup>
+
   <!-- Updates the list of XlfSource items that drives incremental update (see above) -->
   <Target Name="UpdateXlfSourceList"
           DependsOnTargets="GetXlfSources">
@@ -58,7 +70,7 @@
 
   <Target Name="UpdateXlfOnBuild"
           Condition="'$(EnableXlfLocalization)' == 'true' and '$(UpdateXlfOnBuild)' == 'true' and '$(_IsInnerXlfBuild)' != 'true'"
-          BeforeTargets="BeforeBuild"
+          BeforeTargets="$(_UpdateXlfOnBuildBeforeTargets)"
           DependsOnTargets="UpdateXlf"
           />
 
