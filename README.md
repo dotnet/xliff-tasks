@@ -12,7 +12,7 @@ A set of MSBuild tasks and targets to automatically update xliff (.xlf) files fo
 
 If you're using the [Arcade Toolset][arcade-toolset] then the `XliffTasks` package is already pulled in, and enabled by default.
 
-Otherwise, you'll need to add the dotnet-core feed on MyGet (`https://dotnet.myget.org/F/dotnet-core/api/v3/index.json`) to your nuget.config file, and then add a `PackageReference` for the XliffTasks package, like so:
+Otherwise, you'll need to add the Azure DevOps feed `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json` ([browse](https://dev.azure.com/dnceng/public/_packaging?_a=feed&feed=dotnet-eng)) to your NuGet.config file, and then add a `PackageReference` for the XliffTasks package, like so:
 
 ```
 <PackageReference Include="XliffTasks" Version="1.0.0-beta.19253.1" PrivateAssets="all" />
