@@ -64,7 +64,7 @@ Note `XliffTasks` does not force the items into a sorted order if they are not a
 
 ## Contact
 
-For more information, contact @dotnet/dnceng on GitHub, or file an issue.
+For more information, contact @dnceng on GitHub, or file an issue.
  
 [win-x64-build-badge]: https://dev.azure.com/dnceng/internal/_apis/build/status/dotnet/xliff-tasks/dotnet-xliff-tasks-official-ci?branchName=master
 [win-x64-build]: https://dev.azure.com/dnceng/internal/_build?definitionId=485&branchName=master
