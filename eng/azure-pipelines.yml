@@ -25,6 +25,7 @@ stages:
       enablePublishTestResults: false
       enablePublishBuildAssets: true
       enablePublishUsingPipelines: $(_PublishUsingPipelines)
+      enableSourceBuild: true
       enableTelemetry: true
       helixRepo: dotnet/standard
       jobs:
