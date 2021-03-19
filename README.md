@@ -24,7 +24,7 @@ The `PrivateAssets` metadata is needed to prevent `dotnet pack` or `msbuild /t:p
 
 ### Updating .xlf files
 
-Once `XliffTasks` is installed building a project will automatically build satellite assemblies from .xlf files. To _update_ .xlf files to bring them in line with the source .resx/.vsct/.xaml files you need to run the `UpdateXlf` target, like so: 
+Once `XliffTasks` is installed building a project will automatically build satellite assemblies from .xlf files. To _update_ .xlf files to bring them in line with the source .resx/.vsct/.xaml files you need to run the `UpdateXlf` target, like so:
 
 ```
 msbuild /t:UpdateXlf
@@ -65,7 +65,7 @@ Note `XliffTasks` does not force the items into a sorted order if they are not a
 ## Contact
 
 For more information, contact @dotnet/dnceng on GitHub, or file an issue.
- 
-[win-x64-build-badge]: https://dev.azure.com/dnceng/internal/_apis/build/status/dotnet/xliff-tasks/dotnet-xliff-tasks-official-ci?branchName=master
-[win-x64-build]: https://dev.azure.com/dnceng/internal/_build?definitionId=485&branchName=master
+
+[win-x64-build-badge]: https://dev.azure.com/dnceng/internal/_apis/build/status/dotnet/xliff-tasks/dotnet-xliff-tasks-official-ci?branchName=main
+[win-x64-build]: https://dev.azure.com/dnceng/internal/_build?definitionId=485&branchName=main
 [arcade-toolset]: https://github.com/dotnet/arcade
