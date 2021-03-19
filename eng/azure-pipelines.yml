@@ -1,13 +1,13 @@
 # CI and PR triggers
 trigger:
-- master
+- main
 pr:
-- master
+- main
 
 variables:
   - name: _TeamName
     value: DotNetCore
-  - name: _BuildConfig 
+  - name: _BuildConfig
     value: Release
   - name: _PublishUsingPipelines
     value: true
@@ -30,7 +30,7 @@ stages:
       helixRepo: dotnet/standard
       jobs:
       - job: Windows_NT
-        pool: 
+        pool:
           ${{ if or(eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest')) }}:
             name: NetCorePublic-Pool
             queue: buildpool.windows.10.amd64.vs2017.open
@@ -49,7 +49,7 @@ stages:
           - name: _BuildArgs
             value: /p:SignType=$(_SignType)
               /p:DotNetSignType=$(_SignType)
-              /p:MicroBuild_SigningEnabled=true 
+              /p:MicroBuild_SigningEnabled=true
               /p:OverridePackageSource=https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json
               /p:TeamName=$(_TeamName)
               /p:DotNetPublishBlobFeedKey=$(dotnetfeed-storage-access-key-1)
@@ -77,7 +77,7 @@ stages:
         - checkout: self
           clean: true
         - script: eng\common\cibuild.cmd
-            -configuration $(_BuildConfig) 
+            -configuration $(_BuildConfig)
             -prepareMachine
             -warnaserror:0
             $(_BuildArgs)
@@ -86,7 +86,7 @@ stages:
       # Linux leg (only runs in CI)
       - ${{ if eq(variables['System.TeamProject'], 'public') }}:
         - job: Linux
-          pool: 
+          pool:
             name: Hosted Ubuntu 1604
           strategy:
             matrix:
