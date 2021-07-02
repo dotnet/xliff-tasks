@@ -15,7 +15,7 @@ If you're using the [Arcade Toolset][arcade-toolset] then the `XliffTasks` packa
 Otherwise, you'll need to add the Azure DevOps feed `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json` ([browse](https://dev.azure.com/dnceng/public/_packaging?_a=feed&feed=dotnet-eng)) to your NuGet.config file, and then add a `PackageReference` for the XliffTasks package, like so:
 
 ```
-<PackageReference Include="XliffTasks" Version="1.0.0-beta.19253.1" PrivateAssets="all" />
+<PackageReference Include="Microsoft.XliffTasks" Version="1.0.0-beta.19253.1" PrivateAssets="all" />
 ```
 
 The `PrivateAssets` metadata is needed to prevent `dotnet pack` or `msbuild /t:pack` from listing `XliffTasks` as one of your package's dependencies.
