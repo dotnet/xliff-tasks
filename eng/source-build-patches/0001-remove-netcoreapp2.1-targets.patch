@@ -47,7 +47,7 @@ index a79dae2..d5498c2 100644
 -    <XliffTasksDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)..\tools\netcoreapp2.1\</XliffTasksDirectory>
 +    <XliffTasksDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)..\tools\net5.0\</XliffTasksDirectory>
      <XliffTasksDirectory Condition="'$(MSBuildRuntimeType)' != 'Core'">$(MSBuildThisFileDirectory)..\tools\net46\</XliffTasksDirectory>
-     <XliffTasksAssembly>$(XliffTasksDirectory)XliffTasks.dll</XliffTasksAssembly>
+     <XliffTasksAssembly>$(XliffTasksDirectory)Microsoft.XliffTasks.dll</XliffTasksAssembly>
    </PropertyGroup>
 -- 
 2.26.2
