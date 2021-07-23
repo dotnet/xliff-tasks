@@ -10,21 +10,21 @@ A set of MSBuild tasks and targets to automatically update xliff (.xlf) files fo
 
 ## Installing
 
-If you're using the [Arcade Toolset][arcade-toolset] then the `XliffTasks` package is already pulled in, and enabled by default.
+If you're using the [Arcade Toolset][arcade-toolset] then the `Microsoft.DotNet.XliffTasks` package is already pulled in, and enabled by default.
 
 Otherwise, you'll need to add the Azure DevOps feed `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json` ([browse](https://dev.azure.com/dnceng/public/_packaging?_a=feed&feed=dotnet-eng)) to your NuGet.config file, and then add a `PackageReference` for the XliffTasks package, like so:
 
 ```
-<PackageReference Include="Microsoft.XliffTasks" Version="1.0.0-beta.19253.1" PrivateAssets="all" />
+<PackageReference Include="Microsoft.DotNet.XliffTasks" Version="1.0.0-beta.19253.1" PrivateAssets="all" />
 ```
 
-The `PrivateAssets` metadata is needed to prevent `dotnet pack` or `msbuild /t:pack` from listing `XliffTasks` as one of your package's dependencies.
+The `PrivateAssets` metadata is needed to prevent `dotnet pack` or `msbuild /t:pack` from listing `Microsoft.DotNet.XliffTasks` as one of your package's dependencies.
 
-## Using XliffTasks
+## Using Microsoft.DotNet.XliffTasks
 
 ### Updating .xlf files
 
-Once `XliffTasks` is installed building a project will automatically build satellite assemblies from .xlf files. To _update_ .xlf files to bring them in line with the source .resx/.vsct/.xaml files you need to run the `UpdateXlf` target, like so:
+Once `Microsoft.DotNet.XliffTasks` is installed building a project will automatically build satellite assemblies from .xlf files. To _update_ .xlf files to bring them in line with the source .resx/.vsct/.xaml files you need to run the `UpdateXlf` target, like so:
 
 ```
 msbuild /t:UpdateXlf
