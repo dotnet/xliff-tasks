@@ -87,7 +87,7 @@ stages:
       - ${{ if eq(variables['System.TeamProject'], 'public') }}:
         - job: Linux
           pool:
-            name: Hosted Ubuntu 1604
+            vmimage: ubuntu-latest
           strategy:
             matrix:
               Debug:
