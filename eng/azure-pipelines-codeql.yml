@@ -44,4 +44,4 @@ stages:
               -TsaIterationPath $(_TsaIterationPath)
               -TsaRepositoryName "xliff-tasks"
               -TsaCodebaseName "xliff-tasks"
-              -TsaPublish $False'
+              -TsaPublish $True'
