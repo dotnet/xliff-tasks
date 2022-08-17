@@ -43,7 +43,7 @@ namespace XliffTasks
         {
             int replacementCount = 0;
 
-            foreach (Match placeholder in s_placeholderRegex.Matches(text).Cast<Match>())
+            foreach (Match placeholder in s_placeholderRegex.Matches(text))
             {
                 int index = int.Parse(placeholder.Groups[1].Value);
                 replacementCount = Math.Max(replacementCount, index + 1);
