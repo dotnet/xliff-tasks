@@ -28,7 +28,7 @@ namespace XliffTasks.Model
         /// </summary>
         public void Load(string path)
         {
-            using var stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            using FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             Load(stream);
         }
 
@@ -43,7 +43,7 @@ namespace XliffTasks.Model
             // UTF8-with-BOM even if the document has no BOM, which would defeat our purpose of preserving the encoding and BOM
             // of the original document in a Load/Modify/Save cycle.
 
-            using var reader = new StreamReader(stream, s_utf8WithoutBom, detectEncodingFromByteOrderMarks: true);
+            using StreamReader reader = new(stream, s_utf8WithoutBom, detectEncodingFromByteOrderMarks: true);
             Load(reader);
             Encoding = reader.CurrentEncoding;
         }
@@ -67,9 +67,9 @@ namespace XliffTasks.Model
             // reading is happening, each reader will see file before or after overwrite, not in between
 
             EnsureContent();
-            var tempPath = Path.Combine(Path.GetDirectoryName(path), Path.GetRandomFileName());
+            string tempPath = Path.Combine(Path.GetDirectoryName(path), Path.GetRandomFileName());
 
-            using (var stream = File.Open(tempPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+            using (FileStream stream = File.Open(tempPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
             {
                 Save(stream);
             }
@@ -98,7 +98,7 @@ namespace XliffTasks.Model
         {
             EnsureContent();
 
-            using var writer = new StreamWriter(stream, Encoding);
+            using StreamWriter writer = new(stream, Encoding);
             Save(writer);
         }
 

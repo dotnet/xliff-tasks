@@ -75,8 +75,8 @@ namespace XliffTasks.Model
         public bool Update(TranslatableDocument sourceDocument, string sourceDocumentId)
         {
             bool changed = false;
-            var nodesById = new Dictionary<string, TranslatableNode>();
-            foreach (var node in sourceDocument.Nodes)
+            Dictionary<string, TranslatableNode> nodesById = new();
+            foreach (TranslatableNode node in sourceDocument.Nodes)
             {
                 if (nodesById.ContainsKey(node.Id))
                 {
@@ -159,8 +159,8 @@ namespace XliffTasks.Model
                 // again.
                 // Note we don't limit this check to when the source has changed in the original
                 // document because we also want to catch errors introduced during translation.
-                var sourceReplacementCount = unitElement.GetSourceValue().GetReplacementCount();
-                var targetReplacementCount = unitElement.GetTargetValue().GetReplacementCount();
+                int sourceReplacementCount = unitElement.GetSourceValue().GetReplacementCount();
+                int targetReplacementCount = unitElement.GetTargetValue().GetReplacementCount();
 
                 if (targetReplacementCount != sourceReplacementCount)
                 {
@@ -192,7 +192,7 @@ namespace XliffTasks.Model
                         new XElement(Note, sourceNode.Note == "" ? null : sourceNode.Note));
 
                 bool inserted = false;
-                foreach (var transUnit in bodyElement.Elements(TransUnit))
+                foreach (XElement transUnit in bodyElement.Elements(TransUnit))
                 {
                     if (StringComparer.Ordinal.Compare(newTransUnit.GetId(), transUnit.GetId()) < 0)
                     {
@@ -235,13 +235,13 @@ namespace XliffTasks.Model
                 SortedList<string, XElement> sortedTransUnits = new(comparer);
 
                 // Sort the translation units
-                foreach (var transUnit in transUnits)
+                foreach (XElement transUnit in transUnits)
                 {
                     sortedTransUnits.Add(transUnit.GetId(), transUnit);
                 }
 
                 // Remove them from the body element
-                foreach (var transUnit in sortedTransUnits.Values)
+                foreach (XElement transUnit in sortedTransUnits.Values)
                 {
                     transUnit.Remove();
                 }
@@ -259,9 +259,9 @@ namespace XliffTasks.Model
         /// </summary>
         public IReadOnlyDictionary<string, string> GetTranslations()
         {
-            var dictionary = new Dictionary<string, string>();
+            Dictionary<string, string> dictionary = new();
 
-            foreach (var element in _document.Descendants(TransUnit))
+            foreach (XElement element in _document.Descendants(TransUnit))
             {
                 string id = element.GetId();
                 string target = element.GetTargetValue();
@@ -276,7 +276,7 @@ namespace XliffTasks.Model
         {
             XNamespace ns = _document.Root.Name.Namespace;
 
-            var untranslatedResourceIDs =
+            IEnumerable<string> untranslatedResourceIDs =
                 (_document.Descendants(TransUnit)
                  .Where(tu =>
                  {
@@ -312,7 +312,7 @@ namespace XliffTasks.Model
                 System.IO.Stream xliffSchemaResourceStream = typeof(XlfDocument).Assembly.GetManifestResourceStream("XliffTasks.Model.xliff-core-1.2-transitional.xsd");
                 XmlReader xliffSchemaReader = XmlReader.Create(xliffSchemaResourceStream);
 
-                var schemas = new XmlSchemaSet();
+                XmlSchemaSet schemas = new();
                 schemas.Add(targetNamespace: null, xmlSchemaReader);
                 schemas.Add(targetNamespace: null, xliffSchemaReader);
 
