@@ -21,10 +21,8 @@ namespace XliffTasks.Model
                 OmitXmlDeclaration = writer is StringWriter,
             };
 
-            using (var xmlWriter = XmlWriter.Create(writer, settings))
-            {
-                document.Save(xmlWriter);
-            }
+            using var xmlWriter = XmlWriter.Create(writer, settings);
+            document.Save(xmlWriter);
         }
 
         public static void SelfCloseIfPossible(this XElement element)

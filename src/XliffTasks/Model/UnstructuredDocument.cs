@@ -12,8 +12,8 @@ namespace XliffTasks.Model
         const string TranslatableSpanMarker = "@@@";
         const string TranslatableSpanSeparator = "|";
 
-        private List<string> _fragments = new List<string>();
-        private List<UnstructuredTranslatableNode> _nodes = new List<UnstructuredTranslatableNode>();
+        private List<string> _fragments = new();
+        private List<UnstructuredTranslatableNode> _nodes = new();
 
         protected override IEnumerable<TranslatableNode> GetTranslatableNodes()
         {

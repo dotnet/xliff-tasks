@@ -10,7 +10,7 @@
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     <IsPackable>true</IsPackable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <LangVersion>8</LangVersion>
+    <LangVersion>10</LangVersion>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <AssemblyName>Microsoft.DotNet.XliffTasks</AssemblyName>
     <RootNamespace>XliffTasks</RootNamespace>

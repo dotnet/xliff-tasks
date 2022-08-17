@@ -33,7 +33,7 @@ namespace XliffTasks
         /// \}
         ///    The close curly brace indicates the end of the placeholder.
         /// </summary>
-        private static Regex s_placeholderRegex = new Regex(@"\{(\d+)(\,\-?\d+)?(\:[^\}]+)?\}", RegexOptions.Compiled);
+        private static readonly Regex s_placeholderRegex = new Regex(@"\{(\d+)(\,\-?\d+)?(\:[^\}]+)?\}", RegexOptions.Compiled);
 
         /// <summary>
         /// Returns the number of replacement strings needed to properly format the given text.

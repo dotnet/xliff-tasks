@@ -23,7 +23,7 @@ namespace XliffTasks.Model
     {
         private static XmlSchemaSet s_schemaSet;
         
-        private static XNamespace XsiNS = "http://www.w3.org/2001/XMLSchema-instance";
+        private static readonly XNamespace XsiNS = "http://www.w3.org/2001/XMLSchema-instance";
 
         private XDocument _document;
 
@@ -185,7 +185,7 @@ namespace XliffTasks.Model
                 }
 
                 XElement newTransUnit = 
-                    new XElement(TransUnit,
+                    new(TransUnit,
                         new XAttribute("id", sourceNode.Id),
                         new XElement(Source, sourceNode.Source),
                         new XElement(Target, new XAttribute("state", "new"), sourceNode.Source),
@@ -232,7 +232,7 @@ namespace XliffTasks.Model
             if (!transUnits.IsSorted(tu => tu.GetId(), comparer))
             {
                 changed = true;
-                SortedList<string, XElement> sortedTransUnits = new SortedList<string, XElement>(comparer);
+                SortedList<string, XElement> sortedTransUnits = new(comparer);
 
                 // Sort the translation units
                 foreach (var transUnit in transUnits)
@@ -260,7 +260,6 @@ namespace XliffTasks.Model
         public IReadOnlyDictionary<string, string> GetTranslations()
         {
             var dictionary = new Dictionary<string, string>();
-            XNamespace ns = _document.Root.Name.Namespace;
 
             foreach (var element in _document.Descendants(TransUnit))
             {
