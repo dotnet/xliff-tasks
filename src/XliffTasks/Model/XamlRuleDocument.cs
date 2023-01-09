@@ -15,6 +15,9 @@ namespace XliffTasks.Model
     /// </summary>
     internal sealed class XamlRuleDocument : TranslatableXmlDocument
     {
+        private const string XliffTasksNs = "https://github.com/dotnet/xliff-tasks";
+        private const string IsTranslatableAttributeName = "IsTranslatable";
+        
         protected override IEnumerable<TranslatableNode> GetTranslatableNodes()
         {
             foreach (XElement? element in Document.Descendants())
@@ -30,8 +33,8 @@ namespace XliffTasks.Model
                             note: GetComment(element, XmlName(attribute)),
                             attribute: attribute);
                     }
-                    else if (XmlName(attribute) == "Value"
-                        && AttributedName(element) == "SearchTerms")
+                    else if (XmlName(attribute) == "Value" && 
+                             (AttributedName(element) == "SearchTerms" || (bool.TryParse(element.Attribute(XName.Get(IsTranslatableAttributeName, XliffTasksNs))?.Value, out var isTranslatable) && isTranslatable)))
                     {
                         yield return new TranslatableXmlAttribute(
                             id: GenerateIdForPropertyMetadata(element),

@@ -18,7 +18,8 @@ namespace XliffTasks.Tests
         DisplayName=""My rule display name""
         PageTemplate=""generic""
         Description=""My rule description""
-        xmlns=""http://schemas.microsoft.com/build/2009/properties"">
+        xmlns=""http://schemas.microsoft.com/build/2009/properties"" xmlns:xliff=""https://github.com/dotnet/xliff-tasks"" xmlns:mc=""http://schemas.openxmlformats.org/markup-compatibility/2006""
+        mc:Ignorable=""xliff"">
   <!-- DisplayName: My rule display name comment -->
   <!-- Description: My rule description comment -->
   <Rule.Categories>
@@ -38,6 +39,9 @@ namespace XliffTasks.Tests
   <BoolProperty Name=""MyBoolProperty"" Description=""My bool property description."" />
   <StringProperty Name=""MyStringProperty"">
     <StringProperty.Metadata>
+      <NameValuePair Name=""TypeDescriptorText"" Value=""Custom symbols"" xliff:IsTranslatable=""true"">
+        <!-- Value: My type descriptor text comment -->
+      </NameValuePair>
       <NameValuePair Name=""SearchTerms"" Value=""My;Search;Terms"">
         <!-- Value: My search terms comment -->
       </NameValuePair>
@@ -99,6 +103,11 @@ namespace XliffTasks.Tests
         <target state=""new"">My;Search;Terms</target>
         <note>My search terms comment</note>
       </trans-unit>
+      <trans-unit id=""StringProperty|MyStringProperty|Metadata|TypeDescriptorText"">
+        <source>Custom symbols</source>
+        <target state=""new"">Custom symbols</target>
+        <note>My type descriptor text comment</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>";
@@ -114,11 +123,12 @@ namespace XliffTasks.Tests
                 ["EnumValue|MyEnumProperty.Second|DisplayName"] = "GGG",
                 ["EnumValue|MyEnumProperty.Third|DisplayName"] = "HHH",
                 ["BoolProperty|MyBoolProperty|Description"] = "III",
-                ["StringProperty|MyStringProperty|Metadata|SearchTerms"] = "JJJ"
+                ["StringProperty|MyStringProperty|Metadata|SearchTerms"] = "JJJ",
+                ["StringProperty|MyStringProperty|Metadata|TypeDescriptorText"] = "KKK",
             };
 
             string expectedTranslation =
-@"<Rule Name=""MyRule"" DisplayName=""AAA"" PageTemplate=""generic"" Description=""BBB"" xmlns=""http://schemas.microsoft.com/build/2009/properties"">
+@"<Rule Name=""MyRule"" DisplayName=""AAA"" PageTemplate=""generic"" Description=""BBB"" xmlns=""http://schemas.microsoft.com/build/2009/properties"" xmlns:xliff=""https://github.com/dotnet/xliff-tasks"" xmlns:mc=""http://schemas.openxmlformats.org/markup-compatibility/2006"" mc:Ignorable=""xliff"">
   <!-- DisplayName: My rule display name comment -->
   <!-- Description: My rule description comment -->
   <Rule.Categories>
@@ -138,6 +148,9 @@ namespace XliffTasks.Tests
   <BoolProperty Name=""MyBoolProperty"" Description=""III"" />
   <StringProperty Name=""MyStringProperty"">
     <StringProperty.Metadata>
+      <NameValuePair Name=""TypeDescriptorText"" Value=""KKK"" xliff:IsTranslatable=""true"">
+        <!-- Value: My type descriptor text comment -->
+      </NameValuePair>
       <NameValuePair Name=""SearchTerms"" Value=""JJJ"">
         <!-- Value: My search terms comment -->
       </NameValuePair>
