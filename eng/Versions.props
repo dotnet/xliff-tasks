@@ -3,7 +3,6 @@
     <VersionBase>0.2.0</VersionBase>
     <PreReleaseVersionLabel>beta</PreReleaseVersionLabel>
     <UsingToolXliff>false</UsingToolXliff>
-
     <!-- MSBuild
          Only update when there's a source-build package available. -->
     <MicrosoftBuildPackageVersion>15.1.1012</MicrosoftBuildPackageVersion>
