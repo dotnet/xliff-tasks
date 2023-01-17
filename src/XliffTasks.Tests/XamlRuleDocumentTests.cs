@@ -39,10 +39,10 @@ namespace XliffTasks.Tests
   <BoolProperty Name=""MyBoolProperty"" Description=""My bool property description."" />
   <StringProperty Name=""MyStringProperty"">
     <StringProperty.Metadata>
-      <NameValuePair Name=""TypeDescriptorText"" Value=""Custom symbols"" xliff:IsTranslatable=""true"">
+      <NameValuePair Name=""TypeDescriptorText"" Value=""Custom symbols"" xliff:LocalizedProperties=""Value"">
         <!-- Value: My type descriptor text comment -->
       </NameValuePair>
-      <NameValuePair Name=""SearchTerms"" Value=""My;Search;Terms"">
+      <NameValuePair Name=""SearchTerms"" Value=""My;Search;Terms"" TranslatableProp1=""tr1"" TranslatableProp2=""tr2"" NonTranslatableProp3=""same"" xliff:LocalizedProperties=""TranslatableProp1;TranslatableProp2"">
         <!-- Value: My search terms comment -->
       </NameValuePair>
     </StringProperty.Metadata>
@@ -103,7 +103,17 @@ namespace XliffTasks.Tests
         <target state=""new"">My;Search;Terms</target>
         <note>My search terms comment</note>
       </trans-unit>
-      <trans-unit id=""StringProperty|MyStringProperty|Metadata|TypeDescriptorText"">
+      <trans-unit id=""StringProperty|MyStringProperty|Metadata|SearchTerms|TranslatableProp1"">
+        <source>tr1</source>
+        <target state=""new"">tr1</target>
+        <note />
+      </trans-unit>
+      <trans-unit id=""StringProperty|MyStringProperty|Metadata|SearchTerms|TranslatableProp2"">
+        <source>tr2</source>
+        <target state=""new"">tr2</target>
+        <note />
+      </trans-unit>
+      <trans-unit id=""StringProperty|MyStringProperty|Metadata|TypeDescriptorText|Value"">
         <source>Custom symbols</source>
         <target state=""new"">Custom symbols</target>
         <note>My type descriptor text comment</note>
@@ -124,7 +134,9 @@ namespace XliffTasks.Tests
                 ["EnumValue|MyEnumProperty.Third|DisplayName"] = "HHH",
                 ["BoolProperty|MyBoolProperty|Description"] = "III",
                 ["StringProperty|MyStringProperty|Metadata|SearchTerms"] = "JJJ",
-                ["StringProperty|MyStringProperty|Metadata|TypeDescriptorText"] = "KKK",
+                ["StringProperty|MyStringProperty|Metadata|TypeDescriptorText|Value"] = "KKK",
+                ["StringProperty|MyStringProperty|Metadata|SearchTerms|TranslatableProp1"] = "LLL",
+                ["StringProperty|MyStringProperty|Metadata|SearchTerms|TranslatableProp2"] = "MMM",
             };
 
             string expectedTranslation =
@@ -148,10 +160,10 @@ namespace XliffTasks.Tests
   <BoolProperty Name=""MyBoolProperty"" Description=""III"" />
   <StringProperty Name=""MyStringProperty"">
     <StringProperty.Metadata>
-      <NameValuePair Name=""TypeDescriptorText"" Value=""KKK"" xliff:IsTranslatable=""true"">
+      <NameValuePair Name=""TypeDescriptorText"" Value=""KKK"" xliff:LocalizedProperties=""Value"">
         <!-- Value: My type descriptor text comment -->
       </NameValuePair>
-      <NameValuePair Name=""SearchTerms"" Value=""JJJ"">
+      <NameValuePair Name=""SearchTerms"" Value=""JJJ"" TranslatableProp1=""LLL"" TranslatableProp2=""MMM"" NonTranslatableProp3=""same"" xliff:LocalizedProperties=""TranslatableProp1;TranslatableProp2"">
         <!-- Value: My search terms comment -->
       </NameValuePair>
     </StringProperty.Metadata>

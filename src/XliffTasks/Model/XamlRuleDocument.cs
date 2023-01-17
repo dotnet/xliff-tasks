@@ -16,7 +16,7 @@ namespace XliffTasks.Model
     internal sealed class XamlRuleDocument : TranslatableXmlDocument
     {
         private const string XliffTasksNs = "https://github.com/dotnet/xliff-tasks";
-        private const string IsTranslatableAttributeName = "IsTranslatable";
+        private const string LocalizedPropertiesAttributeName = "LocalizedProperties";
         
         protected override IEnumerable<TranslatableNode> GetTranslatableNodes()
         {
@@ -33,14 +33,25 @@ namespace XliffTasks.Model
                             note: GetComment(element, XmlName(attribute)),
                             attribute: attribute);
                     }
-                    else if (XmlName(attribute) == "Value" && 
-                             (AttributedName(element) == "SearchTerms" || (bool.TryParse(element.Attribute(XName.Get(IsTranslatableAttributeName, XliffTasksNs))?.Value, out var isTranslatable) && isTranslatable)))
+                    else if (XmlName(attribute) == "Value" && AttributedName(element) == "SearchTerms")
                     {
                         yield return new TranslatableXmlAttribute(
                             id: GenerateIdForPropertyMetadata(element),
                             source: attribute.Value,
                             note: GetComment(element, XmlName(attribute)),
                             attribute: attribute);
+                    }
+                    else
+                    {
+                        var localizableProperties = element.Attribute(XName.Get(LocalizedPropertiesAttributeName, XliffTasksNs))?.Value?.Split(';');
+                        if (localizableProperties is not null && localizableProperties.Contains(attribute.Name.LocalName))
+                        {
+                            yield return new TranslatableXmlAttribute(
+                                id: GenerateIdForPropertyMetadata(element, attribute),
+                                source: attribute.Value,
+                                note: GetComment(element, XmlName(attribute)),
+                                attribute: attribute);
+                        }
                     }
                 }
             }
@@ -59,11 +70,12 @@ namespace XliffTasks.Model
             return $"{XmlName(parent)}|{AttributedName(parent)}|{XmlName(attribute)}";
         }
 
-        private static string GenerateIdForPropertyMetadata(XElement element)
+        private static string GenerateIdForPropertyMetadata(XElement element, XAttribute? attribute = null)
         {
             XElement grandParent = element.Parent.Parent;
 
-            return $"{XmlName(grandParent)}|{AttributedName(grandParent)}|Metadata|{AttributedName(element)}";
+            var elementBaseId = $"{XmlName(grandParent)}|{AttributedName(grandParent)}|Metadata|{AttributedName(element)}";
+            return attribute is null ? elementBaseId : $"{elementBaseId}|{attribute.Name.LocalName}";
         }
 
         private static string? GetComment(XElement element, string attributeName)
