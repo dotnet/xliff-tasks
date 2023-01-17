@@ -134,7 +134,7 @@ namespace XliffTasks.Tests
                 ["EnumValue|MyEnumProperty.Third|DisplayName"] = "HHH",
                 ["BoolProperty|MyBoolProperty|Description"] = "III",
                 ["StringProperty|MyStringProperty|Metadata|SearchTerms"] = "JJJ",
-                ["StringProperty|MyStringProperty|Metadata|TypeDescriptorText|Value"] = "KKK",
+                ["StringProperty|MyStringProperty|Metadata|TypeDescriptorText|Value"] = "NNN",
                 ["StringProperty|MyStringProperty|Metadata|SearchTerms|TranslatableProp1"] = "LLL",
                 ["StringProperty|MyStringProperty|Metadata|SearchTerms|TranslatableProp2"] = "MMM",
             };
@@ -160,7 +160,7 @@ namespace XliffTasks.Tests
   <BoolProperty Name=""MyBoolProperty"" Description=""III"" />
   <StringProperty Name=""MyStringProperty"">
     <StringProperty.Metadata>
-      <NameValuePair Name=""TypeDescriptorText"" Value=""KKK"" xliff:LocalizedProperties=""Value"">
+      <NameValuePair Name=""TypeDescriptorText"" Value=""NNN"" xliff:LocalizedProperties=""Value"">
         <!-- Value: My type descriptor text comment -->
       </NameValuePair>
       <NameValuePair Name=""SearchTerms"" Value=""JJJ"" TranslatableProp1=""LLL"" TranslatableProp2=""MMM"" NonTranslatableProp3=""same"" xliff:LocalizedProperties=""TranslatableProp1;TranslatableProp2"">
