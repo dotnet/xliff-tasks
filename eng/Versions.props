@@ -6,6 +6,6 @@
     <!-- MSBuild
          Only update when there's a source-build package available. -->
     <MicrosoftBuildVersion>17.3.2</MicrosoftBuildVersion>
-    <MicrosoftBuildUtilitiesCoreVersion>17.3.2/MicrosoftBuildUtilitiesCoreVersion>
+    <MicrosoftBuildUtilitiesCoreVersion>17.3.2</MicrosoftBuildUtilitiesCoreVersion>
   </PropertyGroup>
 </Project>
