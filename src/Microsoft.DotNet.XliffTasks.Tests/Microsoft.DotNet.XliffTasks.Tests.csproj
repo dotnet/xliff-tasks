@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XliffTasks\XliffTasks.csproj" />
+    <ProjectReference Include="..\Microsoft.DotNet.XliffTasks\Microsoft.DotNet.XliffTasks.csproj" />
   </ItemGroup>
 
   <ItemGroup>
