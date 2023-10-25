@@ -36,9 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6BFF6507-DEA
 		src\Directory.Build.targets = src\Directory.Build.targets
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XliffTasks", "src\XliffTasks\XliffTasks.csproj", "{FD587030-E29D-498C-AFC2-7610D8833B06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.DotNet.XliffTasks", "src\Microsoft.DotNet.XliffTasks\Microsoft.DotNet.XliffTasks.csproj", "{FD587030-E29D-498C-AFC2-7610D8833B06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XliffTasks.Tests", "src\XliffTasks.Tests\XliffTasks.Tests.csproj", "{4805F195-D026-4D2D-B7C5-17BC389FCD23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.DotNet.XliffTasks.Tests", "src\Microsoft.DotNet.XliffTasks.Tests\Microsoft.DotNet.XliffTasks.Tests.csproj", "{4805F195-D026-4D2D-B7C5-17BC389FCD23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

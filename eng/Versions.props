@@ -9,7 +9,5 @@
   <PropertyGroup>
     <!-- msbuild - only update when there's a source-build package available. -->
     <MicrosoftBuildUtilitiesCoreVersion>17.3.2</MicrosoftBuildUtilitiesCoreVersion>
-    <!-- netstandard -->
-    <NETStandardLibraryVersion>2.0.3</NETStandardLibraryVersion>
   </PropertyGroup>
 </Project>
